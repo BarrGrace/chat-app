@@ -45,6 +45,5 @@ export async function changeMessageLikes(messageId: number, userId: number, like
     body: JSON.stringify({message: messageId, user: userId, addlike: like})
   } 
 
-  await fetch(endpoint + '/newLikes', data);
-  await fetch(endpoint + '/mockMessages');
+  return await fetch(endpoint + '/newLikes', data);
 }
