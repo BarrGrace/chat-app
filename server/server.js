@@ -1586,19 +1586,15 @@ app.post('/newLikes', (req, res) => {
 
           if (!req.body.addlike) {
 
-            console.log(req.body.user);
             serverMessage.likes.push(req.body.user);
           }
 
           else {
 
             const newMessage = serverMessage.likes.filter(num => num !== req.body.user);
-
-              serverMessage.likes = newMessage;
-            
+             serverMessage.likes = newMessage;
           }
-
-          console.log(mockMessages);
+          
           return;
         }
     })  

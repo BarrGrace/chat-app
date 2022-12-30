@@ -33,11 +33,8 @@ export async function addNewMessage(message: Message) {
   return await res.json();//successfully return the message with a name & likes = [] to the client.
 }
 
-/**
- * POST request to change the user's like of a message
- **/
 export async function changeMessageLikes(messageId: number, userId: number, like: boolean) {
-  // todo: implement sending a rquest to change the like of a message by the user
+ 
   const data = {
 
     method: "Post",
@@ -49,4 +46,5 @@ export async function changeMessageLikes(messageId: number, userId: number, like
   } 
 
   await fetch(endpoint + '/newLikes', data);
+  await fetch(endpoint + '/mockMessages');
 }
