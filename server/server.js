@@ -1518,7 +1518,7 @@ const mockMessagesWithNames = mockMessages.map((message) => {
 
 
 app.use(cors({origin: 'http://localhost:5173'}));
-app.get('/users', (req, res) => {
+app.get('/mockMessages', (req, res) => {
 
     res.send(mockMessagesWithNames);
 });
@@ -1564,15 +1564,42 @@ app.use(express.json());
 
 app.post('/newMessages', (req, res) => {
 
-    mockMessages.push(req.body);//update in the server
+    console.log(req.body);
 
     mockUserDetails.forEach((user) => {
 
         if (user.id === req.body.authorId) {
 
             const newMessage = {...req.body, name: user.name, likes: []};
+            mockMessages.push(newMessage);
             res.send(newMessage);
             return;
         }
     })
+})
+
+app.post('/newLikes', (req, res) => {
+
+    mockMessages.forEach((serverMessage) => {
+
+        if (req.body.message === serverMessage.id) {
+
+          if (!req.body.addlike) {
+
+            console.log(req.body.user);
+            serverMessage.likes.push(req.body.user);
+          }
+
+          else {
+
+            const newMessage = serverMessage.likes.filter(num => num !== req.body.user);
+
+              serverMessage.likes = newMessage;
+            
+          }
+
+          console.log(mockMessages);
+          return;
+        }
+    })  
 })

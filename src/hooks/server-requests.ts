@@ -3,7 +3,7 @@ const endpoint = 'http://localhost:8000';
 
 export async function getMessages() {
 
-  return await fetch(endpoint + '/users')
+  return await fetch(endpoint + '/mockMessages')
       .then((res) => res.json());
 }
 export async function getUsers() {
@@ -30,7 +30,7 @@ export async function addNewMessage(message: Message) {
   }
 
   const res = await fetch(endpoint + '/newMessages', data);
-  return await res.json();
+  return await res.json();//successfully return the message with a name & likes = [] to the client.
 }
 
 /**
@@ -38,4 +38,15 @@ export async function addNewMessage(message: Message) {
  **/
 export async function changeMessageLikes(messageId: number, userId: number, like: boolean) {
   // todo: implement sending a rquest to change the like of a message by the user
+  const data = {
+
+    method: "Post",
+    headers: {
+
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({message: messageId, user: userId, addlike: like})
+  } 
+
+  await fetch(endpoint + '/newLikes', data);
 }
